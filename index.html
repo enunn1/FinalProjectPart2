@@ -1,0 +1,107 @@
+<html>
+<head>
+	<title>Final Project Part 2</title>
+	<style>
+		body {
+			background-color:			lightblue;
+			color:						yellow;
+		}
+		#pContainer {
+			position: 					absolute; 
+			top: 						50px; 
+			left: 						50px; 
+		}
+		#button1 {	
+			position: 					absolute; 
+			top: 						250px; 
+			left: 						50px; 
+		}
+		#block1 {
+			position: 					absolute; 
+			top: 						100px; 
+			left: 						100px; 
+			height:						50px;
+			width:						50px;
+			background-color:			rgb(255, 0, 0);
+		}
+		#image1 {
+			position: 					absolute; 
+			top: 						100px; 
+			left: 						200px; 
+			height:						100px;
+		}
+		
+	</style>
+	<script type="text/javascript">
+		var cycle = 0;
+		var timer1;
+		
+		var red = 255;
+		var green = 0;
+		var blue = 0;
+	
+		function moveIt(a, b) {
+			var x = a + document.getElementById("pContainer").offsetLeft;
+			document.getElementById("pContainer").style.left = x + "px";
+			var y = b + document.getElementById("pContainer").offsetTop;
+			document.getElementById("pContainer").style.top = y + "px";
+		}
+		
+		function colorBox(r, g, b) {
+			red = red + r;
+			green = green + g;
+			blue = blue + b;
+			var colorString = "rgb(" + red + ", " + green + ", " + blue + ")";
+			document.getElementById("block1").style.backgroundColor = colorString;
+		}
+		
+		function resizeImage(h) {
+			var x = h + document.getElementById("image1").offsetHeight;
+			document.getElementById("image1").style.height = x + "px";
+		}
+		
+		function animatePage() {
+			if (cycle < 15)
+			{
+				moveIt(0, 25);
+				cycle++;
+			}
+			else if (cycle < 25)
+			{
+				moveIt(10, 0);
+				cycle++;
+			}
+			else if (cycle < 60)
+			{
+				colorBox(-5, 5, 1);
+				cycle++;
+			}
+			else if (cycle < 85)
+			{
+				resizeImage(5);
+				cycle++
+			}
+			else {
+				stopTimer();
+			}
+		}
+		
+		function startTimer() {
+			timer1 = setInterval(animatePage, 300);
+		}
+	
+		function stopTimer() {
+			clearInterval(timer1);
+		}
+	</script>
+</head>
+<body>
+	<h1>Motion Demo</h1>
+	<div id="pContainer">
+		<p id="paragraph1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+	</div>
+	<div id="block1"></div>
+	<img id="image1" src="images/puppy.jpg" />
+	<input type="button" id="button1" value="Start" onclick="startTimer()" />
+</body>
+</html>
